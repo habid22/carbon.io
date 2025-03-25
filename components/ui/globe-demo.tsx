@@ -2,6 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 
 const World = dynamic(() => import("@/components/globe").then((m) => m.World), {
   ssr: false,
@@ -401,9 +402,10 @@ export default function GlobeDemo() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
+          className="relative z-50" // Added z-index here
         >
           <h2 className="text-center text-xl md:text-4xl font-bold bg-gradient-to-tl from-slate-800 via-emerald-500 to-zinc-400 bg-clip-text text-transparent leading-relaxed">
-            know the consequences of your purchases.
+            know the impact of your purchases.
           </h2>
   
           <p className="text-center text-base md:text-lg font-semibold bg-gradient-to-tl from-slate-800 via-blue-500 to-zinc-400 bg-clip-text text-transparent">
@@ -413,14 +415,15 @@ export default function GlobeDemo() {
           {/* Centered Glowing Button */}
           <div className="flex justify-center mt-8">
             <a
-              href="/get-started" // Update with your actual path
+              href="/get-started"
               className="group relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-emerald-400/50 transition-all duration-300 hover:shadow-[0_0_25px_-5px_rgba(16,185,129,0.5)]"
+              style={{ pointerEvents: 'auto' }} // Force click events
             >
               {/* Animated gradient border */}
-              <span className="absolute inset-[-1000%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#10b981_0%,#059669_50%,#10b981_100%)] opacity-30 group-hover:opacity-100 transition-opacity duration-300" />
+              <span className="absolute inset-[-1000%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#10b981_0%,#059669_50%,#10b981_100%)] opacity-30 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
               
-              {/* Button content */}
-              <span className="relative inline-flex h-full w-full items-center justify-center rounded-full bg-black/90 px-5 py-3 text-sm font-medium text-white backdrop-blur-xl transition-all duration-200 group-hover:bg-black/95">
+              {/* Clickable content area */}
+              <span className="relative inline-flex h-full w-full items-center justify-center rounded-full bg-black/90 px-8 py-3 text-sm font-medium text-white backdrop-blur-xl transition-all duration-200 group-hover:bg-black/95 z-10">
                 Get Started
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -439,7 +442,7 @@ export default function GlobeDemo() {
               </span>
               
               {/* Subtle glow effect */}
-              <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                 <span className="absolute inset-0 bg-[radial-gradient(80%_50%_at_50%_100%,rgba(16,185,129,0.15)_0%,rgba(16,185,129,0)_100%)]" />
               </span>
             </a>
@@ -450,7 +453,7 @@ export default function GlobeDemo() {
         <div className="absolute w-full bottom-0 inset-x-0 h-40 bg-gradient-to-b pointer-events-none select-none from-transparent to-black z-40" />
   
         {/* Globe container */}
-        <div className="absolute w-full -bottom-27 h-72 md:h-full z-10">
+        <div className="absolute w-full -bottom-26 h-72 md:h-full z-10">
           <World data={sampleArcs} globeConfig={globeConfig} />
         </div>
       </div>
