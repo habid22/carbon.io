@@ -402,29 +402,55 @@ export default function GlobeDemo() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          <h2 className="text-center text-xl md:text-4xl font-bold bg-gradient-to-tl from-slate-800 via-emerald-500 to-zinc-400 bg-clip-text text-transparent leading-normal">
-            know the impact of your purchases.
+          <h2 className="text-center text-xl md:text-4xl font-bold bg-gradient-to-tl from-slate-800 via-emerald-500 to-zinc-400 bg-clip-text text-transparent leading-relaxed">
+            know the consequences of your purchases.
           </h2>
   
-          <p className="text-center text-base md:text-lg font-normal text-neutral-200 max-w-md mt-1 mx-auto">
+          <p className="text-center text-base md:text-lg font-semibold bg-gradient-to-tl from-slate-800 via-blue-500 to-zinc-400 bg-clip-text text-transparent">
             find out how much carbon the products you buy emit
           </p>
   
           {/* Centered Glowing Button */}
-          <div className="flex justify-center mt-4">
-            <button className="relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-emerald-400 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all duration-300">
-              <span className="absolute inset-[-1000%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#0f766e_0%,#059669_50%,#0f766e_100%)]" />
-              <span className="inline-flex h-full w-full items-center justify-center rounded-full bg-black px-8 py-3 text-sm font-medium text-white backdrop-blur-3xl">
+          <div className="flex justify-center mt-8">
+            <a
+              href="/get-started" // Update with your actual path
+              className="group relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-emerald-400/50 transition-all duration-300 hover:shadow-[0_0_25px_-5px_rgba(16,185,129,0.5)]"
+            >
+              {/* Animated gradient border */}
+              <span className="absolute inset-[-1000%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#10b981_0%,#059669_50%,#10b981_100%)] opacity-30 group-hover:opacity-100 transition-opacity duration-300" />
+              
+              {/* Button content */}
+              <span className="relative inline-flex h-full w-full items-center justify-center rounded-full bg-black/90 px-5 py-3 text-sm font-medium text-white backdrop-blur-xl transition-all duration-200 group-hover:bg-black/95">
                 Get Started
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="ml-2 h-4 w-4 text-emerald-400 transition-transform group-hover:translate-x-1"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                  />
+                </svg>
               </span>
-            </button>
+              
+              {/* Subtle glow effect */}
+              <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="absolute inset-0 bg-[radial-gradient(80%_50%_at_50%_100%,rgba(16,185,129,0.15)_0%,rgba(16,185,129,0)_100%)]" />
+              </span>
+            </a>
           </div>
         </motion.div>
   
+        {/* Bottom gradient overlay */}
         <div className="absolute w-full bottom-0 inset-x-0 h-40 bg-gradient-to-b pointer-events-none select-none from-transparent to-black z-40" />
   
         {/* Globe container */}
-        <div className="absolute w-full -bottom-25 h-72 md:h-full z-10">
+        <div className="absolute w-full -bottom-27 h-72 md:h-full z-10">
           <World data={sampleArcs} globeConfig={globeConfig} />
         </div>
       </div>
