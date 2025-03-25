@@ -11,15 +11,19 @@
   "dependencies": {
     "@react-three/drei": "^10.0.5",
     "@react-three/fiber": "^9.0.0-alpha.8",
+    "@tsparticles/engine": "^3.8.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.483.0",
     "next": "15.2.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-tsparticles": "^2.12.2",
     "tailwind-merge": "^3.0.2",
     "three": "^0.174.0",
     "three-globe": "^2.42.2",
+    "tsparticles": "^3.8.1",
+    "tsparticles-engine": "^2.12.0",
     "tw-animate-css": "^1.2.4"
   },
   "devDependencies": {
