@@ -395,33 +395,39 @@ export default function GlobeDemo() {
   ];
 
   return (
-     // 1) Make this container bg-black
-     <div className="flex flex-row items-center justify-center py-20 h-screen bg-black relative w-full">
-     <div className="max-w-7xl mx-auto w-full relative overflow-hidden h-full md:h-[40rem] px-4">
-       <motion.div
-         initial={{ opacity: 0, y: 20 }}
-         animate={{ opacity: 1, y: 0 }}
-         transition={{ duration: 1 }}
-         className="div"
-       >
-         {/* 2) Change text color to something visible on black (white, neutral-200, etc.) */}
-         <h2 className="text-center text-xl md:text-4xl font-bold bg-gradient-to-tl from-slate-800 via-emerald-500 to-zinc-400 bg-clip-text text-transparent">
-           know the concequences of your purchases.
-         </h2>
-         <p className="text-center text-base md:text-lg font-normal text-neutral-200 max-w-md mt-2 mx-auto">
-           find out how much carbon the products you buy emit
-            </p>
-
-            
-       </motion.div>
-
-       {/* 3) If you want *pure* black, remove or edit this gradient div */}
-       <div className="absolute w-full bottom-0 inset-x-0 h-40 bg-gradient-to-b pointer-events-none select-none from-transparent to-black z-40" />
-
-       <div className="absolute w-full -bottom-20 h-72 md:h-full z-10">
-         <World data={sampleArcs} globeConfig={globeConfig} />
-       </div>
-     </div>
-   </div>
- );
+    <div className="flex flex-row items-center justify-center py-20 h-screen bg-black relative w-full">
+      <div className="max-w-7xl mx-auto w-full relative overflow-hidden h-full md:h-[40rem] px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        >
+          <h2 className="text-center text-xl md:text-4xl font-bold bg-gradient-to-tl from-slate-800 via-emerald-500 to-zinc-400 bg-clip-text text-transparent leading-normal">
+            know the impact of your purchases.
+          </h2>
+  
+          <p className="text-center text-base md:text-lg font-normal text-neutral-200 max-w-md mt-1 mx-auto">
+            find out how much carbon the products you buy emit
+          </p>
+  
+          {/* Centered Glowing Button */}
+          <div className="flex justify-center mt-4">
+            <button className="relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-emerald-400 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all duration-300">
+              <span className="absolute inset-[-1000%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#0f766e_0%,#059669_50%,#0f766e_100%)]" />
+              <span className="inline-flex h-full w-full items-center justify-center rounded-full bg-black px-8 py-3 text-sm font-medium text-white backdrop-blur-3xl">
+                Get Started
+              </span>
+            </button>
+          </div>
+        </motion.div>
+  
+        <div className="absolute w-full bottom-0 inset-x-0 h-40 bg-gradient-to-b pointer-events-none select-none from-transparent to-black z-40" />
+  
+        {/* Globe container */}
+        <div className="absolute w-full -bottom-25 h-72 md:h-full z-10">
+          <World data={sampleArcs} globeConfig={globeConfig} />
+        </div>
+      </div>
+    </div>
+  );
 }

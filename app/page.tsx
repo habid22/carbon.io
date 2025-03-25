@@ -7,6 +7,7 @@ import { StarsBackground } from "@/components/star-background";
 import { Globe } from "@/components/globe";
 
 
+
 export default function Home() {
   return (
     <div style={{ width: "100%", height: "100vh" }}>
