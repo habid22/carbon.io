@@ -1,0 +1,104 @@
+{
+    "productEmissions": {
+      "fashion": {
+        "tShirt": { "value": 5.5, "label": "Cotton T-Shirt", "unit": "item" },
+        "jeans": { "value": 33.4, "label": "Denim Jeans", "unit": "pair" },
+        "shoes": { "value": 14.0, "label": "Sneakers", "unit": "pair" },
+        "dress": { "value": 20.0, "label": "Dress", "unit": "item" },
+        "jacket": { "value": 40.0, "label": "Jacket", "unit": "item" }
+      },
+      "electronics": {
+        "smartphone": { "value": 85.0, "label": "Smartphone", "unit": "device" },
+        "laptop": { "value": 300.0, "label": "Laptop", "unit": "device" },
+        "tv": { "value": 250.0, "label": "LED TV", "unit": "device" },
+        "tablet": { "value": 150.0, "label": "Tablet", "unit": "device" },
+        "headphones": { "value": 30.0, "label": "Headphones", "unit": "pair" },
+        "smartwatch": { "value": 40.0, "label": "Smartwatch", "unit": "device" },
+        "camera": { "value": 120.0, "label": "Digital Camera", "unit": "device" }
+      },
+      "food": {
+        "beef": { "value": 27.0, "label": "Beef", "unit": "kg" },
+        "chicken": { "value": 6.9, "label": "Chicken", "unit": "kg" },
+        "vegetables": { "value": 2.0, "label": "Vegetables", "unit": "kg" },
+        "rice": { "value": 1.0, "label": "Rice", "unit": "kg" },
+        "milk": { "value": 1.2, "label": "Milk", "unit": "liter" },
+        "cheese": { "value": 2.5, "label": "Cheese", "unit": "kg" },
+        "bread": { "value": 1.8, "label": "Bread", "unit": "loaf" },
+        "coffee": { "value": 0.3, "label": "Coffee", "unit": "cup" }
+      },
+      "household": {
+        "detergent": { "value": 1.2, "label": "Detergent", "unit": "liter" },
+        "shampoo": { "value": 0.8, "label": "Shampoo", "unit": "bottle" },
+        "toothpaste": { "value": 0.5, "label": "Toothpaste", "unit": "tube" },
+        "cleaner": { "value": 0.9, "label": "Household Cleaner", "unit": "bottle" },
+        "lightbulb": { "value": 2.5, "label": "LED Light Bulb", "unit": "item" },
+        "washingMachine": { "value": 500.0, "label": "Washing Machine", "unit": "device" },
+        "fridge": { "value": 800.0, "label": "Refrigerator", "unit": "device" }
+      },
+      "transport": {
+        "car": { "value": 2.5, "label": "Car", "unit": "mile" },
+        "bus": { "value": 0.4, "label": "Bus", "unit": "mile" },
+        "bike": { "value": 0.0, "label": "Bicycle", "unit": "mile" },
+        "train": { "value": 0.3, "label": "Train", "unit": "mile" },
+        "airplane": { "value": 0.2, "label": "Airplane", "unit": "mile" },
+        "scooter": { "value": 0.1, "label": "Electric Scooter", "unit": "mile" }
+      },
+      "furniture": {
+        "sofa": { "value": 150.0, "label": "Sofa", "unit": "item" },
+        "bed": { "value": 200.0, "label": "Bed", "unit": "item" },
+        "table": { "value": 80.0, "label": "Table", "unit": "item" },
+        "chair": { "value": 50.0, "label": "Chair", "unit": "item" },
+        "desk": { "value": 90.0, "label": "Desk", "unit": "item" }
+      },
+      "beauty": {
+        "perfume": { "value": 15.0, "label": "Perfume", "unit": "bottle" },
+        "lotion": { "value": 8.0, "label": "Lotion", "unit": "bottle" },
+        "makeup": { "value": 10.0, "label": "Makeup Kit", "unit": "kit" },
+        "hairDryer": { "value": 20.0, "label": "Hair Dryer", "unit": "device" },
+        "nailPolish": { "value": 3.0, "label": "Nail Polish", "unit": "bottle" }
+      },
+      "sports": {
+        "treadmill": { "value": 250.0, "label": "Treadmill", "unit": "device" },
+        "dumbbells": { "value": 30.0, "label": "Dumbbells", "unit": "set" },
+        "sportsShoes": { "value": 14.0, "label": "Sports Shoes", "unit": "pair" }
+      },
+      "toys": {
+        "actionFigure": { "value": 8.0, "label": "Action Figure", "unit": "item" },
+        "boardGame": { "value": 5.0, "label": "Board Game", "unit": "item" },
+        "videoGameConsole": { "value": 200.0, "label": "Video Game Console", "unit": "device" }
+      },
+      "books": {
+        "paperbackBook": { "value": 2.0, "label": "Paperback Book", "unit": "item" },
+        "hardcoverBook": { "value": 3.0, "label": "Hardcover Book", "unit": "item" },
+        "ebookReader": { "value": 100.0, "label": "Ebook Reader", "unit": "device" }
+      }
+    },
+    "usageEmissions": {
+      "smartphone": 0.5,
+      "laptop": 2.0,
+      "tv": 10.0,
+      "tablet": 1.0,
+      "headphones": 0.2,
+      "smartwatch": 0.3,
+      "camera": 0.4,
+      "car": 0.3,
+      "bus": 0.1,
+      "train": 0.05,
+      "airplane": 0.15,
+      "scooter": 0.05,
+      "treadmill": 1.5,
+      "hairDryer": 0.5,
+      "videoGameConsole": 0.8,
+      "ebookReader": 0.3,
+      "sofa": 0.0,
+      "bed": 0.0,
+      "desk": 0.0,
+      "chair": 0.0,
+      "perfume": 0.0,
+      "makeup": 0.0,
+      "actionFigure": 0.0,
+      "boardGame": 0.0,
+      "paperbackBook": 0.0
+    }
+  }
+  
