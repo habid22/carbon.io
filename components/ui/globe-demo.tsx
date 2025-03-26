@@ -415,7 +415,7 @@ export default function GlobeDemo() {
           {/* Centered Glowing Button */}
           <div className="flex justify-center mt-8">
             <a
-              href="/get-started"
+              href="/calculator"
               className="group relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-emerald-400/50 transition-all duration-300 hover:shadow-[0_0_25px_-5px_rgba(16,185,129,0.5)]"
               style={{ pointerEvents: 'auto' }} // Force click events
             >
