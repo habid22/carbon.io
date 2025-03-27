@@ -45,6 +45,19 @@ export default function ProductCalculator() {
 
   const formRef = useRef<HTMLDivElement>(null);
 
+  // Function to get rating based on total emissions
+  const getRating = (total: number) => {
+    if (total < 200) {
+      return { text: "Very Good", color: "#34d399" };
+    } else if (total < 400) {
+      return { text: "Good", color: "#10b981" };
+    } else if (total < 600) {
+      return { text: "Okay", color: "#facc15" };
+    } else {
+      return { text: "Bad", color: "#ef4444" };
+    }
+  };
+
   // Remove a product from the list
   const removeProduct = (index: number) => {
     setProducts((prev) => prev.filter((_, i) => i !== index));
@@ -59,7 +72,7 @@ export default function ProductCalculator() {
     if (!productData) return;
 
     // Calculate production emissions: value * quantity.
-    // Note: Usage emissions are based on an assumed duration of 3 years.
+    // Usage emissions are assumed for 3 years.
     const productionEmissions = productData.value * currentProduct.quantity;
     const usageEmission = (usageEmissions[currentProduct.type] || 0) * 3;
     const totalEmissions = productionEmissions + usageEmission;
@@ -75,19 +88,20 @@ export default function ProductCalculator() {
       },
     ]);
 
-    // Reset form and scroll back to the top of the form
+    // Reset form and scroll back to the form
     setCurrentProduct({ category: "", type: "", quantity: 1 });
     formRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   const totalEmissions = products.reduce((sum, p) => sum + p.emissions, 0);
   const averageMonthly = 200; // Reference value for the progress bar
+  const rating = getRating(totalEmissions);
 
   const chartData = {
     labels: products.map((p) => `${p.label} (${p.emissions.toFixed(1)} kg)`),
     datasets: [
       {
-        labels: products.map((p) => `${p.label} (${p.emissions.toFixed(1)} kg CO2e)`),
+        label: "Emissions (kg CO2e)",
         data: products.map((p) => p.emissions),
         backgroundColor: [
           "#059669",
@@ -96,7 +110,7 @@ export default function ProductCalculator() {
           "#10b981",
           "#a7f3d0",
           "#34d399",
-          "#059669",
+          "#059669"
         ],
         borderWidth: 0,
       },
@@ -139,7 +153,7 @@ export default function ProductCalculator() {
             >
               <option value="">Select Category</option>
               {Object.entries(productEmissions)
-                // Exclude the transport category due to the different emissions model
+                // Exclude the transport category as its data is handled separately
                 .filter(([category]) => category !== "transport")
                 .map(([category]) => (
                   <option key={category} value={category}>
@@ -312,7 +326,7 @@ export default function ProductCalculator() {
                   </div>
                 ))}
 
-                {/* Total CO2 in the Breakdown Section */}
+                {/* Total CO2 Display */}
                 <div className="pt-6 border-t border-emerald-400/10 text-emerald-200">
                   <span className="text-xl font-bold">
                     Total: {totalEmissions.toFixed(1)} kg CO2e
@@ -332,7 +346,9 @@ export default function ProductCalculator() {
             <div className="flex items-center space-x-6 mb-6">
               <div className="text-5xl font-bold text-white drop-shadow">
                 {totalEmissions.toFixed(1)}
-                <span className="text-2xl ml-2 text-emerald-100/80">kg CO2e</span>
+                <span className="text-2xl ml-2 text-emerald-100/80">
+                  kg CO2e
+                </span>
               </div>
               <div className="h-16 w-px bg-white/20"></div>
               <div className="text-emerald-100/80">
@@ -341,7 +357,17 @@ export default function ProductCalculator() {
               </div>
             </div>
 
-            <div className="w-full h-3 bg-white/10 rounded-full overflow-hidden">
+            {/* Rating Indicator */}
+            <div className="text-center mt-4">
+              <span
+                style={{ color: rating.color }}
+                className="text-2xl font-bold"
+              >
+                {rating.text}
+              </span>
+            </div>
+
+            <div className="w-full h-3 bg-white/10 rounded-full overflow-hidden mt-4">
               <div
                 className="h-full bg-gradient-to-r from-emerald-400 to-cyan-400 transition-all duration-1000 ease-out"
                 style={{

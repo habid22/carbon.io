@@ -86,12 +86,6 @@
       "magazine": { "value": 1.5, "label": "Magazine", "unit": "item" },
       "textbook": { "value": 4.0, "label": "Textbook", "unit": "item" }
     },
-    "automotive": {
-      "sedan": { "value": 5000.0, "label": "Sedan", "unit": "vehicle" },
-      "suv": { "value": 7000.0, "label": "SUV", "unit": "vehicle" },
-      "electricCar": { "value": 6000.0, "label": "Electric Car", "unit": "vehicle" },
-      "motorcycle": { "value": 1500.0, "label": "Motorcycle", "unit": "vehicle" }
-    },
     "office": {
       "desktop": { "value": 400.0, "label": "Desktop Computer", "unit": "device" },
       "printer": { "value": 150.0, "label": "Printer", "unit": "device" },
