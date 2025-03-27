@@ -7,9 +7,9 @@ import db from "@/data/items.json";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-// Define types for the JSON data
+// ----- Types -----
 type EmissionData = {
-  value: number;
+  value: number; // Production CO2 per item (or per mile for transport)
   label: string;
   unit: string;
 };
@@ -21,7 +21,7 @@ type ProductEmissionsType = {
 };
 
 type UsageEmissionsType = {
-  [product: string]: number;
+  [product: string]: number; // Annual usage CO2, or 0 if none
 };
 
 const productEmissions: ProductEmissionsType = db.productEmissions;
@@ -45,11 +45,12 @@ export default function ProductCalculator() {
 
   const formRef = useRef<HTMLDivElement>(null);
 
-  // 1) Function to remove a product by index
+  // Remove a product from the list
   const removeProduct = (index: number) => {
     setProducts((prev) => prev.filter((_, i) => i !== index));
   };
 
+  // Add a product to the list
   const addProduct = () => {
     if (!currentProduct.category || !currentProduct.type) return;
 
@@ -57,32 +58,39 @@ export default function ProductCalculator() {
     const productData = categoryProducts[currentProduct.type];
     if (!productData) return;
 
+    // 1) Production Emissions: "value" × quantity
     const productionEmissions = productData.value * currentProduct.quantity;
-    const usageEmission = (usageEmissions[currentProduct.type] || 0) * 3; // 3-year lifespan
 
-    setProducts([
-      ...products,
+    // 2) Usage Emissions (3-year assumption) if item has a usage entry
+    // Transport items or items not in usageEmissions get 0
+    const usageEmission = (usageEmissions[currentProduct.type] || 0) * 3;
+
+    const totalEmissions = productionEmissions + usageEmission;
+
+    setProducts((prev) => [
+      ...prev,
       {
         category: currentProduct.category,
         type: currentProduct.type,
         quantity: currentProduct.quantity,
-        emissions: productionEmissions + usageEmission,
+        emissions: totalEmissions,
         label: productData.label,
       },
     ]);
 
+    // Reset form
     setCurrentProduct({ category: "", type: "", quantity: 1 });
     formRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   const totalEmissions = products.reduce((sum, p) => sum + p.emissions, 0);
-  const averageMonthly = 200;
+  const averageMonthly = 200; // A reference value for the progress bar
 
   const chartData = {
     labels: products.map((p) => p.label),
     datasets: [
       {
-        label: "Emissions (kg CO2e)",
+        labels: products.map((p) => `${p.label} (${p.emissions.toFixed(1)} kg CO2e)`),
         data: products.map((p) => p.emissions),
         backgroundColor: [
           "#059669",
@@ -111,11 +119,16 @@ export default function ProductCalculator() {
       </h2>
 
       {/* Form Section */}
-      <div ref={formRef} className="relative bg-slate-800/50 p-8 rounded-2xl mb-10 backdrop-blur-sm border border-emerald-400/20 shadow-lg">
+      <div
+        ref={formRef}
+        className="relative bg-slate-800/50 p-8 rounded-2xl mb-10 backdrop-blur-sm border border-emerald-400/20 shadow-lg"
+      >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
           {/* Category */}
           <div className="space-y-2">
-            <label className="text-emerald-300/80 font-medium text-sm">Category</label>
+            <label className="text-emerald-300/80 font-medium text-sm">
+              Category
+            </label>
             <select
               className="w-full p-3.5 rounded-xl bg-slate-900/70 border-2 border-emerald-400/20 focus:border-emerald-400/40 focus:ring-4 ring-emerald-400/20 transition-all appearance-none hover:bg-slate-900/90 text-white"
               value={currentProduct.category}
@@ -138,7 +151,9 @@ export default function ProductCalculator() {
 
           {/* Product */}
           <div className="space-y-2">
-            <label className="text-emerald-300/80 font-medium text-sm">Product</label>
+            <label className="text-emerald-300/80 font-medium text-sm">
+              Product
+            </label>
             <select
               className="w-full p-3.5 rounded-xl bg-slate-900/70 border-2 border-emerald-400/20 focus:border-emerald-400/40 focus:ring-4 ring-emerald-400/20 transition-all appearance-none hover:bg-slate-900/90 text-white"
               value={currentProduct.type}
@@ -152,17 +167,21 @@ export default function ProductCalculator() {
             >
               <option value="">Select Product</option>
               {currentProduct.category &&
-                Object.entries(productEmissions[currentProduct.category]).map(([key, value]) => (
-                  <option key={key} value={key}>
-                    {value.label}
-                  </option>
-                ))}
+                Object.entries(productEmissions[currentProduct.category]).map(
+                  ([key, value]) => (
+                    <option key={key} value={key}>
+                      {value.label}
+                    </option>
+                  )
+                )}
             </select>
           </div>
 
           {/* Quantity */}
           <div className="space-y-2">
-            <label className="text-emerald-300/80 font-medium text-sm">Quantity</label>
+            <label className="text-emerald-300/80 font-medium text-sm">
+              Quantity
+            </label>
             <div className="relative">
               <input
                 type="number"
@@ -179,7 +198,9 @@ export default function ProductCalculator() {
               {currentProduct.type && (
                 <span className="absolute right-3 top-3.5 text-emerald-400/60">
                   {currentProduct.category &&
-                    productEmissions[currentProduct.category][currentProduct.type]?.unit}
+                    productEmissions[currentProduct.category][
+                      currentProduct.type
+                    ]?.unit}
                 </span>
               )}
             </div>
@@ -212,25 +233,7 @@ export default function ProductCalculator() {
               <div className="relative h-72 w-full mx-auto">
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
                   <Pie
-                    data={{
-                      labels: products.map((p) => p.label),
-                      datasets: [
-                        {
-                          label: "Emissions (kg CO2e)",
-                          data: products.map((p) => p.emissions),
-                          backgroundColor: [
-                            "#059669",
-                            "#065f46",
-                            "#047857",
-                            "#10b981",
-                            "#a7f3d0",
-                            "#34d399",
-                            "#059669",
-                          ],
-                          borderWidth: 0,
-                        },
-                      ],
-                    }}
+                    data={chartData}
                     options={{
                       responsive: true,
                       maintainAspectRatio: false,
@@ -283,7 +286,7 @@ export default function ProductCalculator() {
                         {product.emissions.toFixed(1)} kg
                       </span>
 
-                      {/* 2) Delete Button */}
+                      {/* Delete Button */}
                       <button
                         onClick={() => removeProduct(index)}
                         className="text-red-400 hover:text-red-300 transition-colors"
@@ -339,7 +342,7 @@ export default function ProductCalculator() {
             </div>
 
             <div className="w-full h-3 bg-white/10 rounded-full overflow-hidden">
-              <div 
+              <div
                 className="h-full bg-gradient-to-r from-emerald-400 to-cyan-400 transition-all duration-1000 ease-out"
                 style={{
                   width: `${Math.min(
@@ -355,8 +358,12 @@ export default function ProductCalculator() {
           {totalEmissions > averageMonthly && (
             <div className="bg-slate-800/50 p-8 rounded-2xl backdrop-blur-sm border border-cyan-400/20">
               <h4 className="text-xl font-semibold mb-6 text-cyan-300 flex items-center">
-                <svg className="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3zm0 15.5V22m0-4.5a1.5 1.5 0 010-3 1.5 1.5 0 010 3z"/>
+                <svg
+                  className="w-6 h-6 mr-2"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3zm0 15.5V22m0-4.5a1.5 1.5 0 010-3 1.5 1.5 0 010 3z" />
                 </svg>
                 Sustainability Recommendations
               </h4>
