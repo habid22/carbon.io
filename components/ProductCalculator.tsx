@@ -9,7 +9,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 // ----- Types -----
 type EmissionData = {
-  value: number; // Production CO2 per item (or per mile for transport)
+  value: number; // Production CO2 per item (or per unit for non-transport items)
   label: string;
   unit: string;
 };
@@ -58,13 +58,10 @@ export default function ProductCalculator() {
     const productData = categoryProducts[currentProduct.type];
     if (!productData) return;
 
-    // 1) Production Emissions: "value" × quantity
+    // Calculate production emissions: value * quantity.
+    // Note: Usage emissions are based on an assumed duration of 3 years.
     const productionEmissions = productData.value * currentProduct.quantity;
-
-    // 2) Usage Emissions (3-year assumption) if item has a usage entry
-    // Transport items or items not in usageEmissions get 0
     const usageEmission = (usageEmissions[currentProduct.type] || 0) * 3;
-
     const totalEmissions = productionEmissions + usageEmission;
 
     setProducts((prev) => [
@@ -78,16 +75,16 @@ export default function ProductCalculator() {
       },
     ]);
 
-    // Reset form
+    // Reset form and scroll back to the top of the form
     setCurrentProduct({ category: "", type: "", quantity: 1 });
     formRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   const totalEmissions = products.reduce((sum, p) => sum + p.emissions, 0);
-  const averageMonthly = 200; // A reference value for the progress bar
+  const averageMonthly = 200; // Reference value for the progress bar
 
   const chartData = {
-    labels: products.map((p) => p.label),
+    labels: products.map((p) => `${p.label} (${p.emissions.toFixed(1)} kg)`),
     datasets: [
       {
         labels: products.map((p) => `${p.label} (${p.emissions.toFixed(1)} kg CO2e)`),
@@ -141,11 +138,14 @@ export default function ProductCalculator() {
               }
             >
               <option value="">Select Category</option>
-              {Object.entries(productEmissions).map(([category]) => (
-                <option key={category} value={category}>
-                  {category.charAt(0).toUpperCase() + category.slice(1)}
-                </option>
-              ))}
+              {Object.entries(productEmissions)
+                // Exclude the transport category due to the different emissions model
+                .filter(([category]) => category !== "transport")
+                .map(([category]) => (
+                  <option key={category} value={category}>
+                    {category.charAt(0).toUpperCase() + category.slice(1)}
+                  </option>
+                ))}
             </select>
           </div>
 
@@ -312,7 +312,7 @@ export default function ProductCalculator() {
                   </div>
                 ))}
 
-                {/* Total CO2 in the Breakdown Section (optional) */}
+                {/* Total CO2 in the Breakdown Section */}
                 <div className="pt-6 border-t border-emerald-400/10 text-emerald-200">
                   <span className="text-xl font-bold">
                     Total: {totalEmissions.toFixed(1)} kg CO2e

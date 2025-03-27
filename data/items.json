@@ -7,7 +7,8 @@
       "dress": { "value": 20.0, "label": "Dress", "unit": "item" },
       "jacket": { "value": 40.0, "label": "Jacket", "unit": "item" },
       "hat": { "value": 3.0, "label": "Cap/Hat", "unit": "item" },
-      "sunglasses": { "value": 2.0, "label": "Sunglasses", "unit": "pair" }
+      "sunglasses": { "value": 2.0, "label": "Sunglasses", "unit": "pair" },
+      "scarf": { "value": 4.0, "label": "Scarf", "unit": "item" }
     },
     "electronics": {
       "smartphone": { "value": 85.0, "label": "Smartphone", "unit": "device" },
@@ -17,7 +18,8 @@
       "headphones": { "value": 30.0, "label": "Headphones", "unit": "pair" },
       "smartwatch": { "value": 40.0, "label": "Smartwatch", "unit": "device" },
       "camera": { "value": 120.0, "label": "Digital Camera", "unit": "device" },
-      "speaker": { "value": 50.0, "label": "Bluetooth Speaker", "unit": "device" }
+      "speaker": { "value": 50.0, "label": "Bluetooth Speaker", "unit": "device" },
+      "smartThermostat": { "value": 50.0, "label": "Smart Thermostat", "unit": "device" }
     },
     "food": {
       "beef": { "value": 27.0, "label": "Beef", "unit": "kg" },
@@ -28,7 +30,10 @@
       "cheese": { "value": 2.5, "label": "Cheese", "unit": "kg" },
       "bread": { "value": 1.8, "label": "Bread", "unit": "loaf" },
       "coffee": { "value": 0.3, "label": "Coffee", "unit": "cup" },
-      "wine": { "value": 0.5, "label": "Wine", "unit": "bottle" }
+      "wine": { "value": 0.5, "label": "Wine", "unit": "bottle" },
+      "pork": { "value": 12.1, "label": "Pork", "unit": "kg" },
+      "eggs": { "value": 2.0, "label": "Egg Carton", "unit": "carton" },
+      "fish": { "value": 6.0, "label": "Fish", "unit": "kg" }
     },
     "household": {
       "detergent": { "value": 1.2, "label": "Detergent", "unit": "liter" },
@@ -38,15 +43,9 @@
       "lightbulb": { "value": 2.5, "label": "LED Light Bulb", "unit": "item" },
       "washingMachine": { "value": 500.0, "label": "Washing Machine", "unit": "device" },
       "fridge": { "value": 800.0, "label": "Refrigerator", "unit": "device" },
-      "microwave": { "value": 150.0, "label": "Microwave Oven", "unit": "device" }
-    },
-    "transport": {
-      "car": { "value": 2.5, "label": "Car (per mile)", "unit": "mile" },
-      "bus": { "value": 0.4, "label": "Bus (per mile)", "unit": "mile" },
-      "bike": { "value": 0.0, "label": "Bicycle", "unit": "mile" },
-      "train": { "value": 0.3, "label": "Train (per mile)", "unit": "mile" },
-      "airplane": { "value": 0.2, "label": "Airplane (per mile)", "unit": "mile" },
-      "scooter": { "value": 0.1, "label": "Electric Scooter (per mile)", "unit": "mile" }
+      "microwave": { "value": 150.0, "label": "Microwave Oven", "unit": "device" },
+      "airConditioner": { "value": 600.0, "label": "Air Conditioner", "unit": "device" },
+      "vacuumCleaner": { "value": 100.0, "label": "Vacuum Cleaner", "unit": "device" }
     },
     "furniture": {
       "sofa": { "value": 150.0, "label": "Sofa", "unit": "item" },
@@ -54,7 +53,8 @@
       "table": { "value": 80.0, "label": "Table", "unit": "item" },
       "chair": { "value": 50.0, "label": "Chair", "unit": "item" },
       "desk": { "value": 90.0, "label": "Desk", "unit": "item" },
-      "bookshelf": { "value": 70.0, "label": "Bookshelf", "unit": "item" }
+      "bookshelf": { "value": 70.0, "label": "Bookshelf", "unit": "item" },
+      "coffeeTable": { "value": 60.0, "label": "Coffee Table", "unit": "item" }
     },
     "beauty": {
       "perfume": { "value": 15.0, "label": "Perfume", "unit": "bottle" },
@@ -62,25 +62,41 @@
       "makeup": { "value": 10.0, "label": "Makeup Kit", "unit": "kit" },
       "hairDryer": { "value": 20.0, "label": "Hair Dryer", "unit": "device" },
       "nailPolish": { "value": 3.0, "label": "Nail Polish", "unit": "bottle" },
-      "skincare": { "value": 12.0, "label": "Skincare Set", "unit": "set" }
+      "skincare": { "value": 12.0, "label": "Skincare Set", "unit": "set" },
+      "bodyWash": { "value": 2.0, "label": "Body Wash", "unit": "bottle" }
     },
     "sports": {
       "treadmill": { "value": 250.0, "label": "Treadmill", "unit": "device" },
       "dumbbells": { "value": 30.0, "label": "Dumbbells", "unit": "set" },
       "sportsShoes": { "value": 14.0, "label": "Sports Shoes", "unit": "pair" },
-      "bicycle": { "value": 100.0, "label": "Mountain Bike", "unit": "item" }
+      "bicycle": { "value": 100.0, "label": "Mountain Bike", "unit": "item" },
+      "elliptical": { "value": 300.0, "label": "Elliptical Trainer", "unit": "device" }
     },
     "toys": {
       "actionFigure": { "value": 8.0, "label": "Action Figure", "unit": "item" },
       "boardGame": { "value": 5.0, "label": "Board Game", "unit": "item" },
       "videoGameConsole": { "value": 200.0, "label": "Video Game Console", "unit": "device" },
-      "legoSet": { "value": 50.0, "label": "LEGO Set", "unit": "set" }
+      "legoSet": { "value": 50.0, "label": "LEGO Set", "unit": "set" },
+      "puzzle": { "value": 3.0, "label": "Puzzle", "unit": "item" }
     },
     "books": {
       "paperbackBook": { "value": 2.0, "label": "Paperback Book", "unit": "item" },
       "hardcoverBook": { "value": 3.0, "label": "Hardcover Book", "unit": "item" },
       "ebookReader": { "value": 100.0, "label": "Ebook Reader", "unit": "device" },
-      "magazine": { "value": 1.5, "label": "Magazine", "unit": "item" }
+      "magazine": { "value": 1.5, "label": "Magazine", "unit": "item" },
+      "textbook": { "value": 4.0, "label": "Textbook", "unit": "item" }
+    },
+    "automotive": {
+      "sedan": { "value": 5000.0, "label": "Sedan", "unit": "vehicle" },
+      "suv": { "value": 7000.0, "label": "SUV", "unit": "vehicle" },
+      "electricCar": { "value": 6000.0, "label": "Electric Car", "unit": "vehicle" },
+      "motorcycle": { "value": 1500.0, "label": "Motorcycle", "unit": "vehicle" }
+    },
+    "office": {
+      "desktop": { "value": 400.0, "label": "Desktop Computer", "unit": "device" },
+      "printer": { "value": 150.0, "label": "Printer", "unit": "device" },
+      "officeChair": { "value": 100.0, "label": "Office Chair", "unit": "item" },
+      "conferencePhone": { "value": 80.0, "label": "Conference Phone", "unit": "device" }
     }
   },
   "usageEmissions": {
@@ -91,6 +107,7 @@
     "headphones": 0.2,
     "smartwatch": 0.3,
     "camera": 0.4,
+    "smartThermostat": 0.5,
     "treadmill": 1.5,
     "hairDryer": 0.5,
     "videoGameConsole": 0.8,
@@ -103,6 +120,25 @@
     "makeup": 0,
     "actionFigure": 0,
     "boardGame": 0,
-    "paperbackBook": 0
+    "paperbackBook": 0,
+    "scarf": 0,
+    "pork": 0,
+    "eggs": 0,
+    "fish": 0,
+    "airConditioner": 100.0,
+    "vacuumCleaner": 10.0,
+    "coffeeTable": 0,
+    "bodyWash": 0,
+    "elliptical": 2.0,
+    "puzzle": 0,
+    "textbook": 0,
+    "sedan": 2000.0,
+    "suv": 2500.0,
+    "electricCar": 1500.0,
+    "motorcycle": 500.0,
+    "desktop": 5.0,
+    "printer": 1.0,
+    "officeChair": 0,
+    "conferencePhone": 0.5
   }
 }
