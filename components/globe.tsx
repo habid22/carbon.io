@@ -1,12 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import {
-  Color,
-  Scene,
-  Fog,
-  PerspectiveCamera,
-  Vector3,
-} from "three";
+import { Color, Scene, Fog, PerspectiveCamera, Vector3 } from "three";
 import * as THREE from "three";
 import ThreeGlobe from "three-globe";
 import { useThree, Canvas, extend } from "@react-three/fiber";
@@ -126,10 +120,10 @@ export function Globe({ globeConfig, data }: WorldProps) {
     if (!globeRef.current || !isInitialized || !data) return;
 
     const arcs = data;
-    const points = [];
+    const points = []; // Changed to const
     for (let i = 0; i < arcs.length; i++) {
       const arc = arcs[i];
-      // Removed unused rgb value.
+      // Removed unused 'rgb'
       points.push({
         size: defaultProps.pointSize,
         order: arc.order,
@@ -146,7 +140,7 @@ export function Globe({ globeConfig, data }: WorldProps) {
       });
     }
 
-    // remove duplicates for same lat and lng
+    // Remove duplicates for same lat and lng
     const filteredPoints = points.filter(
       (v, i, a) =>
         a.findIndex((v2) =>
@@ -290,7 +284,7 @@ export function World(props: WorldProps & { globeConfig: GlobeConfig }) {
 
 export function hexToRgb(hex: string) {
   const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-  hex = hex.replace(shorthandRegex, function (m, r, g, b) {
+  hex = hex.replace(shorthandRegex, (_m, r, g, b) => {
     return r + r + g + g + b + b;
   });
 
@@ -310,6 +304,5 @@ export function genRandomNumbers(min: number, max: number, count: number) {
     const r = Math.floor(Math.random() * (max - min)) + min;
     if (arr.indexOf(r) === -1) arr.push(r);
   }
-
   return arr;
 }
