@@ -11,8 +11,8 @@ export default function Home() {
   <span className="bg-gradient-to-tl from-emerald-400 to-green-500 hover:from-emerald-300 hover:to-green-400 bg-clip-text text-transparent transition-all duration-300">
     carbon
   </span> 
-  <span className="bg-gradient-to-br from-blue-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 bg-clip-text text-transparent transition-all duration-300">
-    .io
+  <span className="bg-gradient-to-br from-blue-400 to-blue-500 hover:from-cyan-400 hover:to-blue-500 bg-clip-text text-transparent transition-all duration-300">
+    tracker
   </span>
 </h1>
 
