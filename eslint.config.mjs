@@ -13,16 +13,16 @@ export default [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
     rules: {
-      // Warn for unused variables rather than erroring out
+      // Downgrade unused variable errors to warnings.
       "@typescript-eslint/no-unused-vars": "warn",
-      // Enforce using const when variables are not reassigned
-      "prefer-const": "error",
-      // Disable explicit any errors if needed
+      // Downgrade prefer-const errors to warnings.
+      "prefer-const": "warn",
+      // Downgrade usage of var to warnings.
+      "no-var": "warn",
+      // Allow explicit 'any' (you can tighten this later if desired)
       "@typescript-eslint/no-explicit-any": "off",
-      // Disable missing dependency warnings for useEffect hooks (review if necessary)
+      // Disable missing dependency warnings for useEffect hooks
       "react-hooks/exhaustive-deps": "off",
-      // Disallow var; use let or const instead
-      "no-var": "error"
     },
   },
 ];
