@@ -404,6 +404,7 @@ export default function GlobeDemo() {
           transition={{ duration: 1 }}
           className="relative z-50" // Added z-index here
         >
+          
           <h2 className="text-center text-xl md:text-4xl font-bold bg-gradient-to-tl from-slate-800 via-emerald-500 to-zinc-400 bg-clip-text text-transparent leading-relaxed">
             know the impact of your purchases.
           </h2>
